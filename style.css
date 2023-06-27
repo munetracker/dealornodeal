@@ -129,6 +129,7 @@ button {
 }
 #bankContent, #finishedContent, #lastDealContent, #chooseBoxContent {
 	background-color: #FFF;
+	background: rgba(0,0,0,0.1);
 	padding: 20px;
 	border: 4px solid #c8a913;
 	width: 60%;
@@ -146,10 +147,11 @@ button {
 
 }
 #bankContent {
-    background-color: #FEFBC4;
-	background-image: url(https://i.ibb.co/0Y3sQLV/bankBg.jpg);
+    /* background-color: #FEFBC4; */
+	/* background-image: url(https://i.ibb.co/0Y3sQLV/bankBg.jpg); */
+	background: rgba(0,0,0,0.1);
 	background-position: center;
-	background-size: 650px;
+	background-size: 10px;
 }
 #chooseBoxContent {
     background-color: #281D5F;

@@ -3,6 +3,16 @@ var moneyValues = [
 	1,5,7,10,25,50,75,100,250,500,750,1000,2500,5000,7500,10000,
 	25000,50000,75000,100000,250000,500000,750000,1000000
 ];
+
+var moneyValuesActual = {
+	snowber:1, Mentos:5, Pipino_ug_Kamatis:7, Maruya:10, Pito_Beynte_Siomai:25, Yakult:50,
+	Cloud_9:75, Piattos_Gamay:100, Balut:250, Pancit_Canton_Cup_Noodles:500, Jampong_Cup_Noodles:750, Pinipig_Ice_Cream:1000,
+	Cornetto_Ice_Cream:2500, Seven_Eleven_Donut:5000, Seven_Eleven_Donut:7500, McDo_Sundae:10000, Seven_Eleven_Sandwich:25000, Seven_Eleven_Sandwich:50000,
+	pesos_50_Gcash:75000, Magnum_Ice_Cream:100000, Jollibee_Cheesy_Bacon_Burger:250000, pesos_100_Gcash:500000, C1_Jollibee:750000, eleven_inch_albertos_pizza:1000000
+};
+
+var outcome = "";
+
 //all elements
 var boxes = document.querySelectorAll(".box");
 var boxNr = document.querySelectorAll(".boxNr");
@@ -56,6 +66,7 @@ var sg = 15;
 var sb = 0;
 for(var i = 0; i < moneyShow.length; i++){
 	var moneyDisplay = "$" + moneyValues[i];
+	//  + moneyValuesActual[i];
 	moneyShow[i].textContent = moneyDisplay;
 	if(i < moneyShow.length/2){
 		moneyShow[i].classList.add("rounded1");
@@ -121,13 +132,38 @@ function addValuesNStuff(){
 					//if two boxes remain, prompt user to pick one of the boxes
 					if(openedBoxes === 22){
 						winnings.textContent = winningBox;
+						console.log("outcome", outcome)
+						// console.log("winningBox", winningBox)
+
 						lastDeal.style.display = "block";
 					}
 				}, {once: true});
 			} else {
 				boxes[j].classList.add("chosenBox");
-				winningBox = boxValue[j].textContent;
-				console.log("what");
+
+				console.log("what AAA", moneyValuesActual);
+
+				let searchValue = moneyValues[j];
+				let foundKey = null;
+				
+				for (let key in moneyValuesActual) {
+				  if (moneyValuesActual[key] === searchValue) {
+					foundKey = key;
+					break;
+				  }
+				}
+				
+				if (foundKey) {
+				  console.log("The key for the value", searchValue, "is", foundKey);
+				  outcome = foundKey;
+				} else {
+				  console.log("Value", searchValue, "not found in the object");
+				}
+				
+				// console.log("what", boxValue[j].textContent);
+				// winningBox = boxValue[j].textContent + " " + foundKey ;
+				console.log("Winning Value", searchValue)
+				winningBox = foundKey;
 			}
 		})(i);	
 	}
@@ -152,8 +188,29 @@ keepBox.addEventListener("click", function(){
 changeBox.addEventListener("click", function(){
 	lastDeal.style.display = "none";
 	for(var i = 0; i < shuffledValues.length; i++){
-		if(shuffledValues[i] !== winningBox)
-			winnings.textContent = "$" + shuffledValues[i];
+		if(shuffledValues[i] !== winningBox){
+
+			let searchValue = shuffledValues[i];
+			let foundKey = null;
+			
+			for (let key in moneyValuesActual) {
+				if (moneyValuesActual[key] === searchValue) {
+				foundKey = key;
+				break;
+				}
+			}
+			
+			if (foundKey) {
+				console.log("The key for the value", searchValue, "is", foundKey);
+				outcome = foundKey;
+			} else {
+				console.log("Value", searchValue, "not found in the object");
+			}
+
+			// winnings.textContent = "$" + shuffledValues[i] + " " + foundKey ;
+			winnings.textContent = foundKey;
+			console.log("Winning Value", searchValue)
+		}
 	}
 	finish();
 })
