@@ -1,7 +1,12 @@
 //create an array that contains the values
 var moneyValues = [
-	1,5,7,10,25,50,75,100,250,500,750,1000,2500,5000,7500,10000,
-	25000,50000,75000,100000,250000,500000,750000,1000000
+	// 1,5,7,10,25,50,75,100,250,500,750,1000,2500,5000,7500,10000,
+	// 25000,50000,75000,100000,250000,500000,750000,1000000
+	1,2,3,4,5,6,
+	7,8,9,10,11,12,
+	13,14,15,16,17,18,
+	19,20,25,30,40,
+	50
 ];
 
 var moneyValuesActual = {
@@ -65,7 +70,8 @@ var sr = 200;
 var sg = 15;
 var sb = 0;
 for(var i = 0; i < moneyShow.length; i++){
-	var moneyDisplay = "$" + moneyValues[i];
+	// var moneyDisplay = "$" + moneyValues[i];
+	var moneyDisplay = "₱" + moneyValues[i];
 	//  + moneyValuesActual[i];
 	moneyShow[i].textContent = moneyDisplay;
 	if(i < moneyShow.length/2){
@@ -95,7 +101,8 @@ for(var i = 0; i < chooseBoxButton.length; i++){
 function addValuesNStuff(){
 	for(var i = 0; i < boxes.length; i++){
 		//assign values to boxes and hide them
-		boxValue[i].textContent = "$" + shuffledValues[i];
+		boxValue[i].textContent = "₱" + shuffledValues[i];
+		// boxValue[i].textContent = "$" + shuffledValues[i];
 		boxValue[i].classList.add("hideValue");
 		//open box
 		(function(j){
@@ -109,7 +116,8 @@ function addValuesNStuff(){
 					openedBoxes++;
 					//remove opened boxes amounts from the array
 					for(var i = 0; i < shuffledValues.length; i++){
-						if("$" + shuffledValues[i] === boxValue[j].textContent){
+						// if("$" + shuffledValues[i] === boxValue[j].textContent){
+						if("₱" + shuffledValues[i] === boxValue[j].textContent){
 							shuffledValues.splice([i], 1);
 						}
 					}
@@ -124,7 +132,8 @@ function addValuesNStuff(){
 						}
 					}
 					//show bank offer
-					if(openedBoxes === 5 || openedBoxes === 10 || openedBoxes === 15 || openedBoxes === 18 || openedBoxes === 21){
+					// openedBoxes === 5 || 
+					if(openedBoxes === 10 || openedBoxes === 15 || openedBoxes === 18 || openedBoxes === 21){
 						calcOffer();
 						show(bank);
 						animateValue(bankOffer, 0, calcOffer(), 1000);
@@ -132,7 +141,7 @@ function addValuesNStuff(){
 					//if two boxes remain, prompt user to pick one of the boxes
 					if(openedBoxes === 22){
 						winnings.textContent = winningBox;
-						console.log("outcome", outcome)
+						// console.log("outcome", outcome)
 						// console.log("winningBox", winningBox)
 
 						lastDeal.style.display = "block";
@@ -161,9 +170,10 @@ function addValuesNStuff(){
 				}
 				
 				// console.log("what", boxValue[j].textContent);
+				winningBox = boxValue[j].textContent;
 				// winningBox = boxValue[j].textContent + " " + foundKey ;
-				console.log("Winning Value", searchValue)
-				winningBox = foundKey;
+				// console.log("Winning Value", searchValue)
+				// winningBox = foundKey;
 			}
 		})(i);	
 	}
@@ -208,7 +218,8 @@ changeBox.addEventListener("click", function(){
 			}
 
 			// winnings.textContent = "$" + shuffledValues[i] + " " + foundKey ;
-			winnings.textContent = foundKey;
+			winnings.textContent = "$" + shuffledValues[i];
+			// winnings.textContent = foundKey;
 			console.log("Winning Value", searchValue)
 		}
 	}
@@ -260,7 +271,8 @@ function animateValue(id, start, end, duration) {
         var now = new Date().getTime();
         var remaining = Math.max((endTime - now) / duration, 0);
         var value = Math.round(end - (remaining * range));
-        obj.innerHTML = "$" + value;
+		obj.innerHTML = "₱" + value;
+        // obj.innerHTML = "$" + value;
         if (value == end) {
             clearInterval(timer);
         }
